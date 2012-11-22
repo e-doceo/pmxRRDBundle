@@ -21,15 +21,10 @@ class PmxRrdExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $rootDir = $container->getParameter('kernel.root_dir');
 
-        if (null === $config['database_location']) {
-            $container->setParameter('pmx_rrd.database_location', $rootDir . '/rrd');
-        }
-
-        if (null === $config['graph_location']) {
-            $container->setParameter('pmx_rrd.graph_location', $rootDir . '/../web/rrd');
-        }
+        $container->setParameter('pmx_rrd.database_location', $config['database_location']);
+        $container->setParameter('pmx_rrd.graph_location', $config['graph_location']);
+        $container->setParameter('pmx_rrd.web_root', $config['web_root']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

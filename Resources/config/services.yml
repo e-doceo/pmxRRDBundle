@@ -1,7 +1,7 @@
 services:
     pmx_rrd.graph:
         class: Pmx\Bundle\RrdBundle\Component\PmxRrdGraph
-        arguments: [%pmx_rrd.database_location%, %pmx_rrd.graph_location%, @service_container]
+        arguments: [%pmx_rrd.database_location%, %pmx_rrd.graph_location%, %pmx_rrd.web_root%, @service_container]
 
     pmx_rrd.db:
         class: Pmx\Bundle\RrdBundle\Component\PmxRrdDatabase

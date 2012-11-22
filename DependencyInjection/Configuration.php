@@ -22,8 +22,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('database_location')->defaultNull()->end()
-                ->scalarNode('graph_location')->defaultNull()->end()
+                ->scalarNode('database_location')->defaultValue('%kernel.root_dir%/rrd')->end()
+                ->scalarNode('graph_location')->defaultValue('/rrd')->end()
+                ->scalarNode('web_root')->defaultValue('%kernel.root_dir%/../web')->end()
             ->end()
         ;
 

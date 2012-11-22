@@ -42,10 +42,11 @@ class PmxRrdGraph
      * @param $dbLocation
      * @param $imageLocation
      */
-    public function __construct($dbLocation = null, $imageLocation = null, Container $container)
+    public function __construct($dbLocation = null, $imageLocation = null, $webRoot = null, Container $container)
     {
         $this->dbPath = $dbLocation;
         $this->imagePath = $imageLocation;
+        $this->webRoot = $webRoot;
         $this->container = $container;
     }
 
@@ -133,9 +134,7 @@ class PmxRrdGraph
 
     public function getImageUrl()
     {
-        $webImagePath = str_replace($this->container->get('kernel')->getRootDir() . '/../web', '', $this->imagePath);
-
-        return $this->container->get('request')->getBasePath() . sprintf('%s/%s.png', $webImagePath, $this->getImageName());
+        return sprintf('%s%s/%s.png', $this->container->get('request')->getBasePath(), $this->imagePath, $this->getImageName());
     }
 
     public function setGraphWidth($width)
@@ -339,8 +338,6 @@ class PmxRrdGraph
             $opt[] = '--lower-limit=' . $this->lowerLimit;
         }
 
-
-
         foreach ($this->defs as $def) {
             $opt[] = $def;
         }
@@ -362,7 +359,7 @@ class PmxRrdGraph
 
     public function doDraw()
     {
-        $outputFileName = sprintf('%s/%s.png', $this->imagePath, $this->getImageName());
+        $outputFileName = sprintf('%s%s/%s.png', $this->webRoot, $this->imagePath, $this->getImageName());
         $parameters = rrd_graph($outputFileName, $this->getOptions());
 
         if (false !== $error = rrd_error()) {

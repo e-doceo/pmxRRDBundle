@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * @author: pomaxa none <pomaxa@gmail.com>
- * @date: 10/24/12
- */
 
 namespace Pmx\Bundle\RrdBundle\Component;
 

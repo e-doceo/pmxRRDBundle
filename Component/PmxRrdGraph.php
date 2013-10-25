@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * @author: pomaxa none <pomaxa@gmail.com>
- * @date: 10/19/12
- */
 
 namespace Pmx\Bundle\RrdBundle\Component;
 
@@ -41,6 +36,8 @@ class PmxRrdGraph
     /**
      * @param $dbLocation
      * @param $imageLocation
+     * @param null $webRoot
+     * @param \Symfony\Component\DependencyInjection\Container $container
      */
     public function __construct($dbLocation = null, $imageLocation = null, $webRoot = null, Container $container)
     {
